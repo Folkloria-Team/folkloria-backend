@@ -20,7 +20,7 @@ app.use(cors())
 // jwt middleware
 app.use('*', authMiddleware)
 
-app.route('/', router)
+app.route('/api/', router)
 
 logger.info(`🚀 Server is running on port ${process.env.PORT}`)
 

@@ -18,11 +18,11 @@ export const refreshToken = mysqlTable('refresh_token', {
     })
     .unique(),
   token: varchar({ length: 255 }).notNull(),
-  expires: timestamp('expires', { mode: 'string' }).notNull(),
-  createdAt: timestamp('createdAt', { mode: 'string' })
+  expires: timestamp('expires', { mode: 'date' }).notNull(),
+  createdAt: timestamp('createdAt', { mode: 'date' })
     .notNull()
     .default(sql`now()`),
-  updatedAt: timestamp('updatedAt', { mode: 'string' }),
+  updatedAt: timestamp('updatedAt', { mode: 'date' }),
 })
 
 export const RefreshTokenRelation = relations(refreshToken, ({ one }) => ({

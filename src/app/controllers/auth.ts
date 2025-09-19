@@ -1,6 +1,6 @@
 import { authUseCase } from 'core/usecases/auth'
 import { createFactory } from 'hono/factory'
-import { loginSchema } from 'infra/validators/auth'
+import { loginSchema, registerSchema } from 'infra/validators/auth'
 import { setSignedCookie } from 'hono/cookie'
 import { env } from 'infra/utils/env'
 import { createdUserResponseJSON } from 'infra/utils/response'
@@ -46,4 +46,16 @@ const authLoginController = factory.createHandlers(
   }
 )
 
-export const authController = { authLoginController }
+const authRegisterController = factory.createHandlers(
+  validator('json', registerSchema),
+  async (c) => {
+    const { username, password } = c.req.valid('json')
+    const { user } = await authUseCase.register(username, password)
+
+    return createdUserResponseJSON(c, 'Register success', {
+      user,
+    })
+  }
+)
+
+export const authController = { authLoginController, authRegisterController }

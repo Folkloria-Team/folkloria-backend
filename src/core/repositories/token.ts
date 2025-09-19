@@ -12,13 +12,13 @@ async function insertToken(
     .values({
       user_id,
       token: refreshTokenJWT,
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     })
     .onDuplicateKeyUpdate({
       set: {
         token: refreshTokenJWT,
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-        updatedAt: new Date().toISOString(),
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        updatedAt: new Date(),
       },
     })
   return createOrUpdateToken

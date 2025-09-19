@@ -1,0 +1,54 @@
+### Login
+# @name login
+POST http://localhost:3333/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "user@example1.com",
+    "password": "yourpassword1"
+}
+
+### Create Story
+POST http://localhost:3333/api/story
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+{
+  "title": "The Legend of the White Snake",
+  "sinopsis": "A captivating tale of love and transformation.",
+  "content": "Once upon a time in ancient China...",
+  "cover": "http://example.com/covers/white-snake.jpg",
+  "province_id": "0199625c-bf8b-71e9-8a6f-f1f8d6e3ab48"
+}
+
+### Update Story
+PUT http://localhost:3333/api/story/1
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+{
+  "title": "The Legend of the White Snake - Updated",
+  "sinopsis": "An updated captivating tale of love and transformation.",
+  "content": "Oncez upon a time in ancient China, there lived a white snake...",
+  "cover": "http://example.com/covers/white-snake-updated.jpg",
+  "province_id": "0199625c-bf8b-71e9-8a6f-f1f8d6e3ab48"
+}
+
+### Delete Story
+DELETE http://localhost:3333/api/story/1
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+{
+  "message": "Story deleted successfully"
+}
+
+### Get Story by ID
+GET http://localhost:3333/api/story/0199625c-f514-7317-b78a-dccdea535c63
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+### Get Stories by Province
+GET http://localhost:3333/api/story/province/0199625c-bf8b-71e9-8a6f-f1f8d6e3ab48
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json

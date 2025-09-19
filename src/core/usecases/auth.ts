@@ -5,7 +5,7 @@ import { env } from 'infra/utils/env'
 import { sign } from 'hono/jwt'
 import { tokenRepository } from 'core/repositories/token'
 
-export async function login(username: string, password: string) {
+async function login(username: string, password: string) {
   const user = await userRepository.getUserByUsername(username)
   if (!user) {
     throw new HTTPException(404, { message: 'User Tidak Ditemukan' })
@@ -46,6 +46,22 @@ export async function login(username: string, password: string) {
   }
 }
 
+async function register(username: string, password: string) {
+  const existingUser = await userRepository.getUserByUsername(username)
+  if (existingUser) {
+    throw new HTTPException(400, { message: 'Username sudah digunakan' })
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10)
+  const userId = await userRepository.createUser(username, hashedPassword)
+  if (!userId) {
+    throw new HTTPException(500, { message: 'Gagal membuat user' })
+  }
+
+  return { user: userId }
+}
+
 export const authUseCase = {
   login,
+  register,
 }
