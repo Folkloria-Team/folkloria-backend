@@ -21,7 +21,6 @@ Content-Type: application/json
 
 ### Create Story
 POST http://localhost:3333/api/story
-Authorization: Bearer {{login.response.body.data.accessToken}}
 Content-Type: application/json
 
 {
@@ -34,9 +33,7 @@ Content-Type: application/json
 
 ### Update Story
 PUT http://localhost:3333/api/story/1
-Authorization: Bearer {{login.response.body.data.accessToken}}
 Content-Type: application/json
-
 {
   "title": "The Legend of the White Snake - Updated",
   "sinopsis": "An updated captivating tale of love and transformation.",
@@ -47,7 +44,6 @@ Content-Type: application/json
 
 ### Delete Story
 DELETE http://localhost:3333/api/story/1
-Authorization: Bearer {{login.response.body.data.accessToken}}
 Content-Type: application/json
 
 {
@@ -56,10 +52,20 @@ Content-Type: application/json
 
 ### Get Story by ID
 GET http://localhost:3333/api/story/0199625c-f514-7317-b78a-dccdea535c63
-Authorization: Bearer {{login.response.body.data.accessToken}}
 Content-Type: application/json
 
 ### Get Stories by Province
 GET http://localhost:3333/api/story/province/0199625c-bf8b-71e9-8a6f-f1f8d6e3ab48
-Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+### Get All Stories
+GET http://localhost:3333/api/story
+Content-Type: application/json
+
+### Get Image
+GET http://localhost:3333/api/uploads/ERD.png
+Content-Type: application/json
+
+### Get All provinces
+GET http://localhost:3333/api/province
 Content-Type: application/json
