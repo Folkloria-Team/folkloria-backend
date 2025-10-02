@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: ghcr.io/folkloria-team/hono-app:latest
     environment:
       DATABASE_URL: ${DATABASE_URL}
     depends_on:
