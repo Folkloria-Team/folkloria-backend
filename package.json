@@ -2,6 +2,7 @@
   "name": "folkloria-backend",
   "type": "module",
   "scripts": {
+    "start" : "bun run src/app/server.ts",
     "dev": "bun run --hot src/app/server.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
