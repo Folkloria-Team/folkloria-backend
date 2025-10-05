@@ -14,8 +14,13 @@ const app = new Hono<{ Variables: Variables }>()
 
 app.onError(errorHandler)
 
-// fix issue with cors make it dynamic
-app.use(cors())
+app.use(
+  cors({
+    origin: '*',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  })
+)
 
 // error handler
 
